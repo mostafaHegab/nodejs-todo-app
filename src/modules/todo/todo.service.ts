@@ -1,3 +1,4 @@
+import { Helper } from "./todo.helper";
 import { Todo } from "./todo.interface";
 import { TodoModel } from "./todo.model";
 
@@ -20,5 +21,10 @@ export class Service {
 
 	findById(id: string) {
 		return TodoModel.findById(id).lean();
+	}
+
+	filter(query: Partial<Todo>) {
+		const preparedQuery = Helper.prepareFilterQuery(query);
+		return TodoModel.find(preparedQuery);
 	}
 }
