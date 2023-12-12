@@ -14,12 +14,14 @@ const port = process.env.PORT || 3000;
 app.use("/todo", todoRouter);
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
-	Logger.error(error);
 	const status = error.status || HttpStatus.SERVER_ERROR;
+	if (status === HttpStatus.SERVER_ERROR) Logger.error(error);
+
 	const message =
 		process.env.NODE_ENV === "production" && !error.status
 			? "Something went wrong"
 			: error.message || "Something went wrong";
+
 	return res.status(status).json({
 		message,
 	});

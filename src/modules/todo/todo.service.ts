@@ -9,4 +9,8 @@ export class Service {
 		await created.save();
 		return created;
 	}
+
+	update(id: string, update: Todo) {
+		return TodoModel.findByIdAndUpdate(id, update, { new: true }).lean();
+	}
 }
