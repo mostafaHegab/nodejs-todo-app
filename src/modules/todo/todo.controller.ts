@@ -27,4 +27,14 @@ export class Controller {
 			return next(error);
 		}
 	}
+
+	async delete(req: Request<{ id: string }, Todo | null>, res: Response<Todo | null>, next: NextFunction) {
+		try {
+			const deletedTodo = await service.delete(req.params.id);
+			if (!deletedTodo) throw new CustomError(HttpStatus.NOT_FOUND, `todo with id: ${req.params.id} not found`);
+			return res.status(HttpStatus.SUCCESS).json(deletedTodo);
+		} catch (error) {
+			return next(error);
+		}
+	}
 }

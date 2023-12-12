@@ -13,4 +13,8 @@ export class Service {
 	update(id: string, update: Todo) {
 		return TodoModel.findByIdAndUpdate(id, update, { new: true }).lean();
 	}
+
+	delete(id: string) {
+		return TodoModel.findByIdAndDelete(id).lean();
+	}
 }
