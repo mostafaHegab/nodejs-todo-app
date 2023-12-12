@@ -37,4 +37,14 @@ export class Controller {
 			return next(error);
 		}
 	}
+
+	async findById(req: Request<{ id: string }, Todo | null>, res: Response<Todo | null>, next: NextFunction) {
+		try {
+			const todo = await service.findById(req.params.id);
+			if (!todo) throw new CustomError(HttpStatus.NOT_FOUND, `todo with id: ${req.params.id} not found`);
+			return res.status(HttpStatus.SUCCESS).json(todo);
+		} catch (error) {
+			return next(error);
+		}
+	}
 }

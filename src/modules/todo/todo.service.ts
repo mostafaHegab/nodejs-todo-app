@@ -17,4 +17,8 @@ export class Service {
 	delete(id: string) {
 		return TodoModel.findByIdAndDelete(id).lean();
 	}
+
+	findById(id: string) {
+		return TodoModel.findById(id).lean();
+	}
 }
