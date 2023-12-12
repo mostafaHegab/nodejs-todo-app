@@ -47,4 +47,17 @@ export class Controller {
 			return next(error);
 		}
 	}
+
+	async filter(
+		req: Request<{ id: string }, Todo[], undefined, Partial<Todo>>,
+		res: Response<Todo[]>,
+		next: NextFunction
+	) {
+		try {
+			const todos = await service.filter(req.query);
+			return res.status(HttpStatus.SUCCESS).json(todos);
+		} catch (error) {
+			return next(error);
+		}
+	}
 }

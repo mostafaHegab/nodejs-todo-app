@@ -8,3 +8,4 @@ router.post("/", express.json(), controller.create);
 router.put("/:id", express.json(), controller.update);
 router.delete("/:id", controller.delete);
 router.get("/:id", controller.findById);
+router.get("/", controller.filter);
