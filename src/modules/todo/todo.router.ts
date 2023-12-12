@@ -1,6 +1,7 @@
 import express, { Router } from "express";
-import { postTodo } from "./todo.controller";
+import { Controller } from "./todo.controller";
 
 export const router: Router = Router();
+const controller = new Controller();
 
-router.post("/", express.json(), postTodo);
+router.post("/", express.json(), controller.create);
